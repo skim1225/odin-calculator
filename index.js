@@ -1,6 +1,10 @@
 "use strict";
 (function() {
   window.addEventListener("load", init);
+
+  let first;
+  let operator;
+  let second;
   
   function init() {
     
@@ -20,6 +24,19 @@
 
   function divide(a, b) {
     return a / b;
+  }
+
+  function operate(op, a, b) {
+    switch(op) {
+        case "add":
+            return add(a, b);
+        case "subtract":
+            return subtract(a, b);
+        case "multiply":
+            return multiply(a, b);
+        case "divide":
+            return divide(a, b);
+    }
   }
 
   /**
