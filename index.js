@@ -5,9 +5,34 @@
   let first;
   let operator;
   let second;
+  let displayVal = "";
   
   function init() {
-    
+    let nums = qsa('div button');
+    for (let i = 0; i < nums.length; i++) {
+        nums[i].addEventListener('click', updateDisplay);
+    }
+    id('clear').addEventListener('click', clearDisplay);
+    id('equals').addEventListener('click', parseDisplay);
+  }
+
+  function clearDisplay() {
+    id('ans').textContent = '';
+  }
+
+  function updateDisplay(e) {
+    id('ans').textContent += e.target.textContent;
+  }
+
+  function parseDisplay() {
+    let args = id('ans').textContent.split(/\D/);
+    first = args[0];
+    second = args[1];
+    let opsIndex = first.length;
+    operator = id('ans').textContent.charAt(opsIndex);
+    console.log(operator);
+    let res = operate(operator, parseInt(first), parseInt(second));
+    id('ans').textContent = res;
   }
 
   function add(a, b) {
@@ -23,18 +48,22 @@
   }
 
   function divide(a, b) {
-    return a / b;
+    if (b === 0) {
+        return "Can't divide by 0!";
+    } else {
+        return a / b;
+    }
   }
 
   function operate(op, a, b) {
     switch(op) {
-        case "add":
+        case "+":
             return add(a, b);
-        case "subtract":
+        case "-":
             return subtract(a, b);
-        case "multiply":
+        case "*":
             return multiply(a, b);
-        case "divide":
+        case "/":
             return divide(a, b);
     }
   }
